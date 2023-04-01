@@ -7,12 +7,13 @@ import { EventsAppComponent } from './events-app.component';
 import { EventsListComponent } from './events/events-list.component';
 import { registerLocaleData } from '@angular/common';
 import { EventThumbnailComponent } from './events/event-thumbnail/event-thumbnail.component';
+import { NavBarComponent } from './nav/navbar.component';
 
 registerLocaleData(localeDe, 'de-DE');
 
 @NgModule({
   imports: [BrowserModule],
-  declarations: [EventsAppComponent, EventsListComponent, EventThumbnailComponent],
+  declarations: [EventsAppComponent, EventsListComponent, EventThumbnailComponent, NavBarComponent],
   providers: [
     {
       provide: LOCALE_ID,
