@@ -33,6 +33,10 @@ registerLocaleData(localeDe, 'de-DE');
     ToastrService,
     EventRouteActivator,
     {
+      provide: 'canDeactivateCreateEvent',
+      useValue: checkDirtyState,
+    },
+    {
       provide: LOCALE_ID,
       useValue: 'de-DE',
     },
@@ -40,3 +44,11 @@ registerLocaleData(localeDe, 'de-DE');
   bootstrap: [EventsAppComponent],
 })
 export class AppModule {}
+
+export function checkDirtyState(component: CreateEventComponent): boolean {
+  if (component.isDirty)
+    return window.confirm(
+      'You have not saved this event, do you really want to cancel?'
+    );
+  return true;
+}

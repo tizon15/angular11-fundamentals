@@ -6,7 +6,7 @@ import { EventsListComponent } from './app/events/events-list.component';
 import { Routes } from '@angular/router';
 
 export const appRoutes: Routes = [
-  { path: 'events/new', component: CreateEventComponent },
+  { path: 'events/new', component: CreateEventComponent, canDeactivate: ['canDeactivateCreateEvent'] },
   { path: 'events', component: EventsListComponent },
   { path: 'events/:id', component: EventDetailsComponent, canActivate: [EventRouteActivator] },
   { path: '404', component: Error404Component },
