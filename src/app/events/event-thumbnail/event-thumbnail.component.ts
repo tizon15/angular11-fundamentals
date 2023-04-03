@@ -5,6 +5,9 @@ import { Component, Input } from '@angular/core';
   templateUrl: './event-thumbnail.component.html',
   styles: [
     `
+      .green {
+        color: #003300 !important;
+      }
       .thumbnail {
         min-height: 210px;
       }
