@@ -6,16 +6,17 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from '../routes';
 import { ToastrService } from './common/toastr.service';
 import { EventsAppComponent } from './events-app.component';
-import { EventThumbnailComponent } from './events/event-thumbnail/event-thumbnail.component';
-import { EventDetailsComponent } from './events/events-details/event-details.component';
-import { EventsListComponent } from './events/events-list.component';
-import { EventService } from './events/shared/event.service';
 import { NavBarComponent } from './nav/navbar.component';
-import { CreateEventComponent } from './events/creation/create-event/create-event.component';
 import { Error404Component } from './errors/error404.component';
-import { EventRouteActivator } from './events/events-details/event-route.activator.service';
-import { EventsListResolver } from './events/events-list-resolver.service';
-
+import {
+  EventThumbnailComponent,
+  EventDetailsComponent,
+  EventsListComponent,
+  EventService,
+  CreateEventComponent,
+  EventRouteActivator,
+  EventsListResolver,
+} from './events/index';
 registerLocaleData(localeDe, 'de-DE');
 
 @NgModule({
