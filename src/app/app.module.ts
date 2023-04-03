@@ -9,6 +9,7 @@ import { registerLocaleData } from '@angular/common';
 import { EventThumbnailComponent } from './events/event-thumbnail/event-thumbnail.component';
 import { NavBarComponent } from './nav/navbar.component';
 import { EventService } from './events/shared/event.service';
+import { ToastrService } from './common/toastr.service';
 
 registerLocaleData(localeDe, 'de-DE');
 
@@ -17,6 +18,7 @@ registerLocaleData(localeDe, 'de-DE');
   declarations: [EventsAppComponent, EventsListComponent, EventThumbnailComponent, NavBarComponent],
   providers: [
     EventService,
+    ToastrService,
     {
       provide: LOCALE_ID,
       useValue: 'de-DE',
