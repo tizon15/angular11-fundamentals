@@ -1,28 +1,35 @@
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import localeDe from '@angular/common/locales/de';
-
-import { EventsAppComponent } from './events-app.component';
-import { EventsListComponent } from './events/events-list.component';
-import { registerLocaleData } from '@angular/common';
-import { EventThumbnailComponent } from './events/event-thumbnail/event-thumbnail.component';
-import { NavBarComponent } from './nav/navbar.component';
-import { EventService } from './events/shared/event.service';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from '../routes';
 import { ToastrService } from './common/toastr.service';
+import { EventsAppComponent } from './events-app.component';
+import { EventThumbnailComponent } from './events/event-thumbnail/event-thumbnail.component';
+import { EventDetailsComponent } from './events/events-details/event-details.component';
+import { EventsListComponent } from './events/events-list.component';
+import { EventService } from './events/shared/event.service';
+import { NavBarComponent } from './nav/navbar.component';
 
 registerLocaleData(localeDe, 'de-DE');
 
 @NgModule({
-  imports: [BrowserModule],
-  declarations: [EventsAppComponent, EventsListComponent, EventThumbnailComponent, NavBarComponent],
+  imports: [BrowserModule, RouterModule.forRoot(appRoutes)],
+  declarations: [
+    EventsAppComponent,
+    EventsListComponent,
+    EventThumbnailComponent,
+    NavBarComponent,
+    EventDetailsComponent,
+  ],
   providers: [
     EventService,
     ToastrService,
     {
       provide: LOCALE_ID,
       useValue: 'de-DE',
-    }
+    },
   ],
   bootstrap: [EventsAppComponent],
 })
