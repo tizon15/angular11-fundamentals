@@ -12,6 +12,8 @@ import { EventsListComponent } from './events/events-list.component';
 import { EventService } from './events/shared/event.service';
 import { NavBarComponent } from './nav/navbar.component';
 import { CreateEventComponent } from './events/creation/create-event/create-event.component';
+import { Error404Component } from './errors/error404.component';
+import { EventRouteActivator } from './events/events-details/event-route.activator.service';
 
 registerLocaleData(localeDe, 'de-DE');
 
@@ -24,10 +26,12 @@ registerLocaleData(localeDe, 'de-DE');
     NavBarComponent,
     EventDetailsComponent,
     CreateEventComponent,
+    Error404Component,
   ],
   providers: [
     EventService,
     ToastrService,
+    EventRouteActivator,
     {
       provide: LOCALE_ID,
       useValue: 'de-DE',
