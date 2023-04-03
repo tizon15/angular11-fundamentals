@@ -11,6 +11,7 @@ import { EventDetailsComponent } from './events/events-details/event-details.com
 import { EventsListComponent } from './events/events-list.component';
 import { EventService } from './events/shared/event.service';
 import { NavBarComponent } from './nav/navbar.component';
+import { CreateEventComponent } from './events/creation/create-event/create-event.component';
 
 registerLocaleData(localeDe, 'de-DE');
 
@@ -22,6 +23,7 @@ registerLocaleData(localeDe, 'de-DE');
     EventThumbnailComponent,
     NavBarComponent,
     EventDetailsComponent,
+    CreateEventComponent,
   ],
   providers: [
     EventService,
