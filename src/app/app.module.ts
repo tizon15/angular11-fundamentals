@@ -14,6 +14,7 @@ import { NavBarComponent } from './nav/navbar.component';
 import { CreateEventComponent } from './events/creation/create-event/create-event.component';
 import { Error404Component } from './errors/error404.component';
 import { EventRouteActivator } from './events/events-details/event-route.activator.service';
+import { EventsListResolver } from './events/events-list-resolver.service';
 
 registerLocaleData(localeDe, 'de-DE');
 
@@ -32,6 +33,7 @@ registerLocaleData(localeDe, 'de-DE');
     EventService,
     ToastrService,
     EventRouteActivator,
+    EventsListResolver,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState,
