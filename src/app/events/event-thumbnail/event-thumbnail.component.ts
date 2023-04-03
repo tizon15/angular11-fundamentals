@@ -5,12 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './event-thumbnail.component.html',
   styles: [
     `
-      .green {
-        color: #003300 !important;
-      }
-      .bold {
-        font-weight: bold;
-      }
       .thumbnail {
         min-height: 210px;
       }
@@ -30,9 +24,16 @@ export class EventThumbnailComponent {
   getStartTimeClass() {
     /* const isEarlyStart = this.event && this.event.time === '8:00 am';
     return {green:isEarlyStart, bold: isEarlyStart} */ // return of a object
+
     /* if (this.event && this.event.time === '8:00 am') return 'green bold';
     return ''; */ // return of a string
+
     if (this.event && this.event.time === '8:00 am') return ['green', 'bold'];
     return []; // return of a method
+  }
+  getStartTimeStyle(): any {
+    if (this.event && this.event.time === '8:00 am')
+      return { color: '#003300', 'font-weight': 'bold' };
+    return {};
   }
 }
