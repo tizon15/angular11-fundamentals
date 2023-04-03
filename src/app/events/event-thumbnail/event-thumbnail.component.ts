@@ -8,6 +8,9 @@ import { Component, Input } from '@angular/core';
       .green {
         color: #003300 !important;
       }
+      .bold {
+        font-weight: bold;
+      }
       .thumbnail {
         min-height: 210px;
       }
