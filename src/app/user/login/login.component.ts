@@ -18,11 +18,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   userName: string;
   password: string;
-  mouseoverLogin
+  mouseoverLogin:any;
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
-  login(formValues) {
+  login(formValues: { userName: string; password: string; }) {
     this.authService.loginUser(formValues.userName, formValues.password);
     this.router.navigate(['events']);
   }
