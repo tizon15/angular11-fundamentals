@@ -1,3 +1,11 @@
+# Angular11-fundamentals
+
+Practice of a Angular course (Angular 11 fundamentals) from pluralsight
+
+Angular CLI 11.2.3
+Node 14.16.0
+ngf-bootstrap for predefined styles
+
 # NgFundamentals
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
