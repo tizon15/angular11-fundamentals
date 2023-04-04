@@ -17,6 +17,7 @@ import {
   EventRouteActivator,
   EventsListResolver,
 } from './events/index';
+import { AuthService } from './user/auth.service';
 registerLocaleData(localeDe, 'de-DE');
 
 @NgModule({
@@ -35,6 +36,7 @@ registerLocaleData(localeDe, 'de-DE');
     ToastrService,
     EventRouteActivator,
     EventsListResolver,
+    AuthService,
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState,
