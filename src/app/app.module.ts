@@ -16,6 +16,7 @@ import {
   CreateEventComponent,
   EventRouteActivator,
   EventsListResolver,
+  CreateSessionComponent,
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -31,6 +32,7 @@ registerLocaleData(localeDe, 'de-DE');
     EventDetailsComponent,
     CreateEventComponent,
     Error404Component,
+    CreateSessionComponent,
   ],
   providers: [
     EventService,
