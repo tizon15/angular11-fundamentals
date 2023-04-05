@@ -16,10 +16,14 @@ export class EventService {
   getEvent(id: number): IEvent {
     return EVENTS.find((event) => event.id === id);
   }
-  saveEvent(event) {
+  saveEvent(event: IEvent) {
     event.id = 999;
-    event.session = []
+    event.session = [];
     EVENTS.push(event);
+  }
+  updateEvent(event: IEvent) {
+    let index = EVENTS.findIndex((x) => (x.id = event.id));
+    EVENTS[index] = event;
   }
 }
 
@@ -36,7 +40,7 @@ const EVENTS: IEvent[] = [
       city: 'London',
       country: 'England',
     },
-    sessions: [
+    session: [
       {
         id: 1,
         name: 'Using Angular 4 Pipes',
@@ -115,7 +119,7 @@ const EVENTS: IEvent[] = [
     //   country: 'Netherlands',
     // },
     onlineUrl: 'http://ng-nl.org',
-    sessions: [
+    session: [
       {
         id: 1,
         name: 'Testing Angular 4 Workshop',
@@ -175,7 +179,7 @@ const EVENTS: IEvent[] = [
       city: 'Salt Lake City',
       country: 'USA',
     },
-    sessions: [
+    session: [
       {
         id: 1,
         name: 'How Elm Powers Angular 4',
@@ -257,7 +261,7 @@ const EVENTS: IEvent[] = [
       city: 'New York',
       country: 'USA',
     },
-    sessions: [
+    session: [
       {
         id: 1,
         name: 'Diversity in Tech',
@@ -306,7 +310,7 @@ const EVENTS: IEvent[] = [
       city: 'Las Vegas',
       country: 'USA',
     },
-    sessions: [
+    session: [
       {
         id: 1,
         name: 'Gambling with Angular',

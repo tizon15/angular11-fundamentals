@@ -11,9 +11,9 @@ export interface IEvent {
     country: string;
   };
   onlineUrl?: string;
-  sessions: ISessions[];
+  session: ISession[];
 }
-export interface ISessions {
+export interface ISession {
   id: number;
   name: string;
   presenter: string;

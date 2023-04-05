@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ISessions } from '../../shared';
+import { ISession } from '../../shared';
 
 @Component({
   selector: 'sessions-list',
@@ -7,7 +7,7 @@ import { ISessions } from '../../shared';
   styles: [],
 })
 export class SessionsListComponent implements OnInit {
-    @Input() sessions: ISessions[];
+    @Input() sessions: ISession[];
   constructor() {}
   ngOnInit(): void {}
 }
