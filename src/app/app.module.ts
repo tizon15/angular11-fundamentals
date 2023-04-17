@@ -21,6 +21,7 @@ import {
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CollapseWellComponent } from './common/collapse-well/collapse-well.component';
 registerLocaleData(localeDe, 'de-DE');
 
 @NgModule({
@@ -34,7 +35,8 @@ registerLocaleData(localeDe, 'de-DE');
     CreateEventComponent,
     Error404Component,
     CreateSessionComponent,
-    SessionsListComponent
+    SessionsListComponent,
+    CollapseWellComponent
   ],
   providers: [
     EventService,
