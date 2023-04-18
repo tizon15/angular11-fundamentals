@@ -4,29 +4,36 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../routes';
-import { ToastrService } from './common/toastr.service';
-import { EventsAppComponent } from './events-app.component';
-import { NavBarComponent } from './nav/navbar.component';
-import { Error404Component } from './errors/error404.component';
-import {
-  EventThumbnailComponent,
-  EventDetailsComponent,
-  EventsListComponent,
-  EventService,
-  CreateEventComponent,
-  EventRouteActivator,
-  EventsListResolver,
-  CreateSessionComponent,
-  SessionsListComponent,
-  DurationPipe,
-} from './events/index';
-import { AuthService } from './user/auth.service';
+import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
+/* import { ToastrService } from './common/toastr.service'; */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CollapseWellComponent } from './common/collapse-well/collapse-well.component';
+import { Error404Component } from './errors/error404.component';
+import { EventsAppComponent } from './events-app.component';
+import {
+  CreateEventComponent,
+  CreateSessionComponent,
+  DurationPipe,
+  EventDetailsComponent,
+  EventRouteActivator,
+  EventService,
+  EventThumbnailComponent,
+  EventsListComponent,
+  EventsListResolver,
+  SessionsListComponent,
+} from './events/index';
+import { NavBarComponent } from './nav/navbar.component';
+import { AuthService } from './user/auth.service';
 registerLocaleData(localeDe, 'de-DE');
 
+declare let toastr: Toastr;
 @NgModule({
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+  ],
   declarations: [
     EventsAppComponent,
     EventsListComponent,
@@ -37,15 +44,16 @@ registerLocaleData(localeDe, 'de-DE');
     Error404Component,
     CreateSessionComponent,
     SessionsListComponent,
-    CollapseWellComponent, 
-    DurationPipe
+    CollapseWellComponent,
+    DurationPipe,
   ],
   providers: [
     EventService,
-    ToastrService,
+    // ToastrService,
     EventRouteActivator,
     EventsListResolver,
     AuthService,
+    { provide: TOASTR_TOKEN, useValue: toastr },
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState,
