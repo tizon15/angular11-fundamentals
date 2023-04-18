@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styles: [],
 })
 export class CollapseWellComponent implements OnInit {
-    @Input() title: string;
+    // @Input() title: string;
     visible: boolean = true;
   constructor() {}
   ngOnInit(): void {}
