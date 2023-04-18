@@ -18,6 +18,7 @@ import {
   EventsListResolver,
   CreateSessionComponent,
   SessionsListComponent,
+  DurationPipe,
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -36,7 +37,8 @@ registerLocaleData(localeDe, 'de-DE');
     Error404Component,
     CreateSessionComponent,
     SessionsListComponent,
-    CollapseWellComponent
+    CollapseWellComponent, 
+    DurationPipe
   ],
   providers: [
     EventService,
