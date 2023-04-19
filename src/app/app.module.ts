@@ -19,6 +19,7 @@ import {
   EventThumbnailComponent,
   EventsListComponent,
   EventsListResolver,
+  LocationValidator,
   SessionsListComponent,
   UpvoteComponent,
   VoterService,
@@ -52,6 +53,7 @@ let jQuery = window['$'];
     SimpleModalComponent,
     ModalTriggerDirective,
     UpvoteComponent,
+    LocationValidator,
   ],
   providers: [
     EventService,
