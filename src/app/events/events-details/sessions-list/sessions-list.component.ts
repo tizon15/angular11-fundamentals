@@ -20,7 +20,7 @@ export class SessionsListComponent implements OnInit, OnChanges {
 
   visibleSessions: ISession[] = [];
 
-  constructor(private auth: AuthService, private voterService: VoterService) {}
+  constructor(public auth: AuthService, private voterService: VoterService) {}
   ngOnInit(): void {}
   ngOnChanges(): void {
     if (this.sessions) {
