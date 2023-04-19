@@ -20,6 +20,7 @@ import {
   EventsListComponent,
   EventsListResolver,
   SessionsListComponent,
+  UpvoteComponent,
 } from './events/index';
 import { NavBarComponent } from './nav/navbar.component';
 import { AuthService } from './user/auth.service';
@@ -49,6 +50,7 @@ let jQuery = window['$'];
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
+    UpvoteComponent,
   ],
   providers: [
     EventService,

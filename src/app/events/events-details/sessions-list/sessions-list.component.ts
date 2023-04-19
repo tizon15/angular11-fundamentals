@@ -38,6 +38,9 @@ export class SessionsListComponent implements OnInit, OnChanges {
       });
     }
   }
+  userHasVoted(){
+    
+  }
 }
 
 function sortByNameAsc(s1: ISession, s2: ISession) {
