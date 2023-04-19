@@ -21,6 +21,7 @@ import {
   EventsListResolver,
   SessionsListComponent,
   UpvoteComponent,
+  VoterService,
 } from './events/index';
 import { NavBarComponent } from './nav/navbar.component';
 import { AuthService } from './user/auth.service';
@@ -58,6 +59,7 @@ let jQuery = window['$'];
     EventRouteActivator,
     EventsListResolver,
     AuthService,
+    VoterService,
     { provide: TOASTR_TOKEN, useValue: toastr },
     {provide: JQ_TOKEN , useValue: jQuery},
     {
