@@ -4,7 +4,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../routes';
-import { CollapseWellComponent, JQ_TOKEN, SimpleModalComponent, TOASTR_TOKEN, Toastr } from './common/index';
+import { CollapseWellComponent, JQ_TOKEN, ModalTriggerDirective, SimpleModalComponent, TOASTR_TOKEN, Toastr } from './common/index';
 /* import { ToastrService } from './common/toastr.service'; */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Error404Component } from './errors/error404.component';
@@ -48,6 +48,7 @@ let jQuery = window['$'];
     CollapseWellComponent,
     DurationPipe,
     SimpleModalComponent,
+    ModalTriggerDirective,
   ],
   providers: [
     EventService,
