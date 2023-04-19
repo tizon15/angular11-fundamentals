@@ -4,10 +4,9 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../routes';
-import { TOASTR_TOKEN, Toastr } from './common/toastr.service';
+import { CollapseWellComponent, JQ_TOKEN, TOASTR_TOKEN, Toastr } from './common/index';
 /* import { ToastrService } from './common/toastr.service'; */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CollapseWellComponent } from './common/collapse-well/collapse-well.component';
 import { Error404Component } from './errors/error404.component';
 import { EventsAppComponent } from './events-app.component';
 import {
@@ -26,7 +25,9 @@ import { NavBarComponent } from './nav/navbar.component';
 import { AuthService } from './user/auth.service';
 registerLocaleData(localeDe, 'de-DE');
 
-declare let toastr: Toastr;
+let toastr: Toastr = window['toastr'];
+let jQuery = window['$'];
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -54,6 +55,7 @@ declare let toastr: Toastr;
     EventsListResolver,
     AuthService,
     { provide: TOASTR_TOKEN, useValue: toastr },
+    {provide: JQ_TOKEN , useValue: jQuery},
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState,
