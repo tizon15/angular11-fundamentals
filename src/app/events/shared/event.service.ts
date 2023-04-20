@@ -17,27 +17,29 @@ export class EventService {
         subject.complete();
       }, 100);
       return subject;
-  } */
+  }
+  
+   getEvent(id: number): IEvent {
+    return EVENTS.find((event) => event.id === id);
+  }
+  */
 
   /**
    *  Server method
    * @returns
    */
   getEvents(): Observable<IEvent[]> {
-    return this.httpClient.get<IEvent[]>('/api/events')
-    .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
+    return this.httpClient
+      .get<IEvent[]>('/api/events')
+      .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    };
+  getEvent(id: number): Observable<IEvent> {
+    return this.httpClient
+      .get<IEvent>('/api/events/' + id)
+      .pipe(catchError(this.handleError<IEvent>('getEvents')));
   }
 
-  getEvent(id: number): IEvent {
-    return EVENTS.find((event) => event.id === id);
-  }
   saveEvent(event: IEvent) {
     event.id = 999;
     event.session = [];
@@ -67,6 +69,13 @@ export class EventService {
       emmiter.emit(results);
     }, 100);
     return emmiter;
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 }
 

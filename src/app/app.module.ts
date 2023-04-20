@@ -22,7 +22,8 @@ import {
   CreateSessionComponent,
   DurationPipe,
   EventDetailsComponent,
-  EventRouteActivator,
+  EventResolver,
+  /* EventRouteActivator */
   EventService,
   EventThumbnailComponent,
   EventsListComponent,
@@ -67,8 +68,9 @@ let jQuery = window['$'];
   providers: [
     EventService,
     // ToastrService,
-    EventRouteActivator,
+    // EventRouteActivator,
     EventsListResolver,
+    EventResolver,
     AuthService,
     VoterService,
     { provide: TOASTR_TOKEN, useValue: toastr },
