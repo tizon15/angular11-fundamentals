@@ -33,13 +33,22 @@ export class CreateEventComponent implements OnInit {
   constructor(private router: Router, private eventService: EventService) {}
 
   ngOnInit(): void {}
-
-  saveEvent(formValues) {
+  /** Without Server */
+  /*  saveEvent(formValues) {
     this.eventService.saveEvent(formValues);
     this.isDirty = false;
     this.router.navigate(['/events']);
 
+  } */
+
+  /** With Server */
+  saveEvent(formValues) {
+    this.eventService.saveEvent(formValues).subscribe(() => {
+      this.isDirty = false;
+      this.router.navigate(['/events']);
+    });
   }
+
   cancel(): void {
     this.router.navigate(['/events']);
   }

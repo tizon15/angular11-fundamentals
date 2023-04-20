@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IEvent, ISession } from './event.model';
@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 export class EventService {
   constructor(private httpClient: HttpClient) {}
 
-  /* Method before adding the server 
+  /* Without Server
  
     getEvents(): Observable<IEvent[]> {
       let subject = new Subject<IEvent[]>();
@@ -25,7 +25,7 @@ export class EventService {
   */
 
   /**
-   *  Server method
+   *  With Server
    * @returns
    */
   getEvents(): Observable<IEvent[]> {
@@ -37,24 +37,38 @@ export class EventService {
   getEvent(id: number): Observable<IEvent> {
     return this.httpClient
       .get<IEvent>('/api/events/' + id)
-      .pipe(catchError(this.handleError<IEvent>('getEvents')));
+      .pipe(catchError(this.handleError<IEvent>('getEvent')));
   }
 
+  /*  Without server
+  
   saveEvent(event: IEvent) {
     event.id = 999;
     event.session = [];
     EVENTS.push(event);
+  } */
+
+  /** With Server */
+  saveEvent(event: IEvent) {
+    let options = {
+      headers: new HttpHeaders({ 'Content-Typer': 'application/json' }),
+    };
+    return this.httpClient.post<IEvent>('/api/events', event, options)
+    .pipe(catchError(this.handleError<IEvent>('saveEvent')));
   }
-  updateEvent(event: IEvent) {
+/** Without server*/
+ /*  updateEvent(event: IEvent) {
     let index = EVENTS.findIndex((x) => (x.id = event.id));
     EVENTS[index] = event;
-  }
+  } */
+
+
   searchSessions(searchTerm: string) {
     let term = searchTerm.toLocaleLowerCase();
     let results: ISession[] = [];
 
     EVENTS.forEach((event) => {
-      let matchingSessions = event.session.filter(
+      let matchingSessions = event.sessions.filter(
         (value) => value.name.toLocaleLowerCase().indexOf(term) > -1
       );
       matchingSessions = matchingSessions.map((session: any) => {
@@ -95,7 +109,7 @@ const EVENTS: IEvent[] = [
       city: 'London',
       country: 'England',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Using Angular 4 Pipes',
@@ -174,7 +188,7 @@ const EVENTS: IEvent[] = [
     //   country: 'Netherlands',
     // },
     onlineUrl: 'http://ng-nl.org',
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Testing Angular 4 Workshop',
@@ -234,7 +248,7 @@ const EVENTS: IEvent[] = [
       city: 'Salt Lake City',
       country: 'USA',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'How Elm Powers Angular 4',
@@ -316,7 +330,7 @@ const EVENTS: IEvent[] = [
       city: 'New York',
       country: 'USA',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Diversity in Tech',
@@ -365,7 +379,7 @@ const EVENTS: IEvent[] = [
       city: 'Las Vegas',
       country: 'USA',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Gambling with Angular',

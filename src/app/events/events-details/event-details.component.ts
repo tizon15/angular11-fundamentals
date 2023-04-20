@@ -50,14 +50,15 @@ export class EventDetailsComponent implements OnInit {
     this.addMode = true;
   }
 
+  
   savedNewSession(session: ISession) {
     const nextId = Math.max.apply(
       null,
-      this.event.session.map((s) => s.id)
+      this.event.sessions.map((s) => s.id)
     );
     session.id = nextId + 1;
-    this.event.session.push(session);
-    this.eventService.updateEvent(this.event);
+    this.event.sessions.push(session);
+    this.eventService.saveEvent(this.event).subscribe();
     this.addMode = false;
   }
   cancelAddSession() {
