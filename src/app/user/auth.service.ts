@@ -26,6 +26,21 @@ export class AuthService {
     }))
   }
 
+  isAuthenticated() {
+    return !!this.currentUser;
+  }
+  checkAuthenticationStatus(){
+    this.http.get('/api/currentIdentity').pipe(tap(data => {
+      if (data instanceof Object) {
+        this.currentUser = <IUser>data;
+      }
+    })).subscribe();
+  }
+  updateCurrentUser(firstName: string, lastName: string) {
+    this.currentUser.firstName = firstName;
+    this.currentUser.lastName = lastName;
+  }
+  
   /** Without Server 
   loginUser(userName: string, password: string) {
     this.currentUser = {
@@ -35,11 +50,4 @@ export class AuthService {
       lastName: 'Papa',
     };
   }*/
-  isAuthenticated() {
-    return !!this.currentUser;
-  }
-  updateCurrentUser(firstName: string, lastName: string) {
-    this.currentUser.firstName = firstName;
-    this.currentUser.lastName = lastName;
-  }
 }
