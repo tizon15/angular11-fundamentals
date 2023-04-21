@@ -11,7 +11,7 @@ export interface IEvent {
     country: string;
   };
   onlineUrl?: string;
-  session: ISession[];
+  sessions: ISession[];
 }
 export interface ISession {
   id: number;

@@ -1,36 +1,79 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { IEvent, ISession } from './event.model';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class EventService {
-  getEvents(): Observable<IEvent[]> {
-    let subject = new Subject<IEvent[]>();
-    setTimeout(() => {
-      subject.next(EVENTS);
-      subject.complete();
-    }, 100);
-    return subject;
-  }
+  constructor(private httpClient: HttpClient) {}
 
-  getEvent(id: number): IEvent {
+  /* Without Server
+ 
+    getEvents(): Observable<IEvent[]> {
+      let subject = new Subject<IEvent[]>();
+      setTimeout(() => {
+        subject.next(EVENTS);
+        subject.complete();
+      }, 100);
+      return subject;
+  }
+  
+   getEvent(id: number): IEvent {
     return EVENTS.find((event) => event.id === id);
   }
+  */
+
+  /**
+   *  With Server
+   * @returns
+   */
+  getEvents(): Observable<IEvent[]> {
+    return this.httpClient
+      .get<IEvent[]>('/api/events')
+      .pipe(catchError(this.handleError<IEvent[]>('getEvents', [])));
+  }
+
+  getEvent(id: number): Observable<IEvent> {
+    return this.httpClient
+      .get<IEvent>('/api/events/' + id)
+      .pipe(catchError(this.handleError<IEvent>('getEvent')));
+  }
+
+  /*  Without server
+  
   saveEvent(event: IEvent) {
     event.id = 999;
     event.session = [];
     EVENTS.push(event);
+  } */
+
+  /** With Server */
+  saveEvent(event: IEvent) {
+    let options = {
+      headers: new HttpHeaders({ 'Content-Typer': 'application/json' }),
+    };
+    return this.httpClient.post<IEvent>('/api/events', event, options)
+    .pipe(catchError(this.handleError<IEvent>('saveEvent')));
   }
-  updateEvent(event: IEvent) {
+  searchSessions(searchTerm: string): Observable<ISession[]> {
+    return this.httpClient
+      .get<ISession[]>('/api/sessions/search?search=' + searchTerm)
+      .pipe(catchError(this.handleError<ISession[]>('searchSessions')));
+  }
+/** Without server
+   updateEvent(event: IEvent) {
     let index = EVENTS.findIndex((x) => (x.id = event.id));
     EVENTS[index] = event;
-  }
+  } 
+
+
   searchSessions(searchTerm: string) {
     let term = searchTerm.toLocaleLowerCase();
     let results: ISession[] = [];
 
     EVENTS.forEach((event) => {
-      let matchingSessions = event.session.filter(
+      let matchingSessions = event.sessions.filter(
         (value) => value.name.toLocaleLowerCase().indexOf(term) > -1
       );
       matchingSessions = matchingSessions.map((session: any) => {
@@ -45,9 +88,19 @@ export class EventService {
       emmiter.emit(results);
     }, 100);
     return emmiter;
-  }
-}
+  }*/
 
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
+  }
+} 
+
+/** @type {*} {}
+ * constant to simulate a server
+ 
 const EVENTS: IEvent[] = [
   {
     id: 1,
@@ -61,7 +114,7 @@ const EVENTS: IEvent[] = [
       city: 'London',
       country: 'England',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Using Angular 4 Pipes',
@@ -140,7 +193,7 @@ const EVENTS: IEvent[] = [
     //   country: 'Netherlands',
     // },
     onlineUrl: 'http://ng-nl.org',
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Testing Angular 4 Workshop',
@@ -200,7 +253,7 @@ const EVENTS: IEvent[] = [
       city: 'Salt Lake City',
       country: 'USA',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'How Elm Powers Angular 4',
@@ -282,7 +335,7 @@ const EVENTS: IEvent[] = [
       city: 'New York',
       country: 'USA',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Diversity in Tech',
@@ -331,7 +384,7 @@ const EVENTS: IEvent[] = [
       city: 'Las Vegas',
       country: 'USA',
     },
-    session: [
+    sessions: [
       {
         id: 1,
         name: 'Gambling with Angular',
@@ -358,4 +411,4 @@ const EVENTS: IEvent[] = [
       },
     ],
   },
-];
+]; */

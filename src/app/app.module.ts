@@ -4,8 +4,16 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../routes';
-import { CollapseWellComponent, JQ_TOKEN, ModalTriggerDirective, SimpleModalComponent, TOASTR_TOKEN, Toastr } from './common/index';
+import {
+  CollapseWellComponent,
+  JQ_TOKEN,
+  ModalTriggerDirective,
+  SimpleModalComponent,
+  TOASTR_TOKEN,
+  Toastr,
+} from './common/index';
 /* import { ToastrService } from './common/toastr.service'; */
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Error404Component } from './errors/error404.component';
 import { EventsAppComponent } from './events-app.component';
@@ -14,7 +22,8 @@ import {
   CreateSessionComponent,
   DurationPipe,
   EventDetailsComponent,
-  EventRouteActivator,
+  EventResolver,
+  /* EventRouteActivator */
   EventService,
   EventThumbnailComponent,
   EventsListComponent,
@@ -37,6 +46,7 @@ let jQuery = window['$'];
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
+    HttpClientModule,
   ],
   declarations: [
     EventsAppComponent,
@@ -58,12 +68,13 @@ let jQuery = window['$'];
   providers: [
     EventService,
     // ToastrService,
-    EventRouteActivator,
+    // EventRouteActivator,
     EventsListResolver,
+    EventResolver,
     AuthService,
     VoterService,
     { provide: TOASTR_TOKEN, useValue: toastr },
-    {provide: JQ_TOKEN , useValue: jQuery},
+    { provide: JQ_TOKEN, useValue: jQuery },
     {
       provide: 'canDeactivateCreateEvent',
       useValue: checkDirtyState,

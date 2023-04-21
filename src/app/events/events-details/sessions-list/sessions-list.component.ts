@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/user/auth.service';
 import { ISession } from '../../shared';
 import { VoterService } from '../upvote/voter.service';
@@ -17,6 +12,7 @@ export class SessionsListComponent implements OnInit, OnChanges {
   @Input() sessions: ISession[];
   @Input() filterBy: string;
   @Input() sortBy: string;
+  @Input() eventId: number;
 
   visibleSessions: ISession[] = [];
 
@@ -39,19 +35,29 @@ export class SessionsListComponent implements OnInit, OnChanges {
       });
     }
   }
-  toggleVote(session:ISession){
-    if (this.userHasVoted(session)){
-      this.voterService.deleteVoter(session, this.auth.currentUser.userName);
+  toggleVote(session: ISession) {
+    if (this.userHasVoted(session)) {
+      this.voterService.deleteVoter(
+        this.eventId,
+        session,
+        this.auth.currentUser.userName
+      );
     } else {
-      this.voterService.addVoter(session, this.auth.currentUser.userName);
-
+      this.voterService.addVoter(
+        this.eventId,
+        session,
+        this.auth.currentUser.userName
+      );
     }
-    if( this.sortBy === 'votes'){
+    if (this.sortBy === 'votes') {
       this.visibleSessions.sort(sortByVotesDesc);
     }
   }
-  userHasVoted(session: ISession): boolean{
-    return this.voterService.userHasVoted(session, this.auth.currentUser.userName);
+  userHasVoted(session: ISession): boolean {
+    return this.voterService.userHasVoted(
+      session,
+      this.auth.currentUser.userName
+    );
   }
 }
 
@@ -65,5 +71,5 @@ function sortByNameAsc(s1: ISession, s2: ISession) {
   }
 }
 function sortByVotesDesc(s1: ISession, s2: ISession) {
-  return s2.voters.length - s1.voters.length
+  return s2.voters.length - s1.voters.length;
 }

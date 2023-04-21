@@ -19,7 +19,7 @@
       <address>
         <strong>Address:</strong><br />
         {{ event?.location?.address }}<br />
-        {{ event?.location?.city }}, {{ event?.location?.country }}
+        {{ event?.location?.city }} {{ event?.location?.country }}
       </address>
     </div>
   </div>
@@ -60,7 +60,7 @@
     </div>
   </div>
   <br />
-  <sessions-list *ngIf="!addMode" [sortBy]="sortBy" [filterBy]="filterBy" [sessions]="event?.session"></sessions-list>
+  <sessions-list *ngIf="!addMode" [eventId]="event?.id" [sortBy]="sortBy" [filterBy]="filterBy" [sessions]="event?.sessions"></sessions-list>
   <create-session *ngIf="addMode" (savedNewSession)="savedNewSession($event)"
     (cancelAddSession)="cancelAddSession()"></create-session>
 </div>
