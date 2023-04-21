@@ -9,15 +9,16 @@ import { Observable, of } from 'rxjs';
 })
 export class AuthService {
   currentUser: IUser;
+  private options = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
   constructor(private http: HttpClient) {}
 
   /** With Server */
   loginUser(userName: string, password: string) {
     let loginIfo = { username: userName, password: password };
-    const options = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    };
-    return this.http.post('/api/login', loginIfo, options)
+   
+    return this.http.post('/api/login', loginIfo, this.options)
     .pipe(tap(data => {
        this.currentUser = <IUser>data['user'];
     }))
@@ -39,6 +40,7 @@ export class AuthService {
   updateCurrentUser(firstName: string, lastName: string) {
     this.currentUser.firstName = firstName;
     this.currentUser.lastName = lastName;
+    return this.http.put(`/api/users/${this.currentUser.id}`, this.currentUser, this.options)
   }
   
   /** Without Server 
@@ -49,5 +51,10 @@ export class AuthService {
       firstName: 'John',
       lastName: 'Papa',
     };
-  }*/
+  }
+  updateCurrentUser(firstName: string, lastName: string) {
+    this.currentUser.firstName = firstName;
+    this.currentUser.lastName = lastName;
+  }
+  */
 }
