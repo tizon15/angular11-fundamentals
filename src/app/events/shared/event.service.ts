@@ -56,11 +56,16 @@ export class EventService {
     return this.httpClient.post<IEvent>('/api/events', event, options)
     .pipe(catchError(this.handleError<IEvent>('saveEvent')));
   }
-/** Without server*/
- /*  updateEvent(event: IEvent) {
+  searchSessions(searchTerm: string): Observable<ISession[]> {
+    return this.httpClient
+      .get<ISession[]>('/api/sessions/search?search=' + searchTerm)
+      .pipe(catchError(this.handleError<ISession[]>('searchSessions')));
+  }
+/** Without server
+   updateEvent(event: IEvent) {
     let index = EVENTS.findIndex((x) => (x.id = event.id));
     EVENTS[index] = event;
-  } */
+  } 
 
 
   searchSessions(searchTerm: string) {
@@ -83,7 +88,7 @@ export class EventService {
       emmiter.emit(results);
     }, 100);
     return emmiter;
-  }
+  }*/
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -91,11 +96,11 @@ export class EventService {
       return of(result as T);
     };
   }
-}
+} 
 
 /** @type {*} {}
  * constant to simulate a server
- */
+ 
 const EVENTS: IEvent[] = [
   {
     id: 1,
@@ -406,4 +411,4 @@ const EVENTS: IEvent[] = [
       },
     ],
   },
-];
+]; */
