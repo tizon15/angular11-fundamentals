@@ -14,6 +14,11 @@ describe('SessionListComponent', () => {
     debugEl: DebugElement;
 
   beforeEach(() => {
+    mockAuthService = {
+      isAuthenticated: () => true,
+      currentUser: { userName: 'Joe' },
+    };
+    mockVoterService = { userHasVoted: () => true };
     TestBed.configureTestingModule({
       declarations: [SessionsListComponent, DurationPipe],
       providers: [
@@ -27,10 +32,10 @@ describe('SessionListComponent', () => {
     element = fixture.nativeElement;
   });
   describe('initial display', () => {
-    it('should have the correct title', () => {
+    it('should have the correct name', () => {
       component.sessions = [
         {
-          name: 'Session1',
+          name: 'Session 1',
           id: 3,
           presenter: 'Joe',
           duration: 1,
@@ -45,6 +50,10 @@ describe('SessionListComponent', () => {
       component.ngOnChanges();
 
       fixture.detectChanges();
+
+      expect(element.querySelector('[well-title]').textContent).toContain(
+        'Session 1'
+      );
     });
   });
 });
