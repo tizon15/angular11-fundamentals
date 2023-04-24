@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/user/auth.service';
 import { VoterService } from '../upvote/voter.service';
 import { SessionsListComponent } from './sessions-list.component';
 import { DurationPipe } from '../../shared';
+import { By } from '@angular/platform-browser';
 
 describe('SessionListComponent', () => {
   let mockAuthService,
@@ -54,6 +55,7 @@ describe('SessionListComponent', () => {
       expect(element.querySelector('[well-title]').textContent).toContain(
         'Session 1'
       );
+      expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1');
     });
   });
 });
