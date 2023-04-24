@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { AuthService } from 'src/app/user/auth.service';
 import { ISession } from '../../shared';
 import { VoterService } from '../upvote/voter.service';
@@ -8,7 +8,7 @@ import { VoterService } from '../upvote/voter.service';
   templateUrl: './sessions-list.component.html',
   styles: [],
 })
-export class SessionsListComponent implements OnInit, OnChanges {
+export class SessionsListComponent implements OnChanges {
   @Input() sessions: ISession[];
   @Input() filterBy: string;
   @Input() sortBy: string;
@@ -17,7 +17,6 @@ export class SessionsListComponent implements OnInit, OnChanges {
   visibleSessions: ISession[] = [];
 
   constructor(public auth: AuthService, private voterService: VoterService) {}
-  ngOnInit(): void {}
   ngOnChanges(): void {
     if (this.sessions) {
       this.filterSessions(this.filterBy);

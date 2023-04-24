@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { EventService } from '../shared/index';
 
@@ -27,12 +27,11 @@ import { EventService } from '../shared/index';
     `,
   ],
 })
-export class CreateEventComponent implements OnInit {
+export class CreateEventComponent {
   isDirty = true;
   newEvent;
   constructor(private router: Router, private eventService: EventService) {}
 
-  ngOnInit(): void {}
   /** Without Server */
   /*  saveEvent(formValues) {
     this.eventService.saveEvent(formValues);

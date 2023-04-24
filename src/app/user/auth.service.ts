@@ -16,7 +16,7 @@ export class AuthService {
 
   /** With Server */
   loginUser(userName: string, password: string) {
-    let loginIfo = { username: userName, password: password };
+    const loginIfo = { username: userName, password: password };
 
     return this.http
       .post('/api/login', loginIfo, this.options)
