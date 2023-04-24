@@ -37,8 +37,8 @@ import { NavBarComponent } from './nav/navbar.component';
 import { AuthService } from './user/auth.service';
 registerLocaleData(localeDe, 'de-DE');
 
-let toastr: Toastr = window['toastr'];
-let jQuery = window['$'];
+const toastr: Toastr = window['toastr'];
+const jQuery = window['$'];
 
 @NgModule({
   imports: [
