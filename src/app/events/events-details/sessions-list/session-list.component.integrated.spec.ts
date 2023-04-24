@@ -1,10 +1,13 @@
-import { DebugElement } from '@angular/core';
+import { Component, DebugElement, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthService } from 'src/app/user/auth.service';
 import { VoterService } from '../upvote/voter.service';
 import { SessionsListComponent } from './sessions-list.component';
 import { DurationPipe } from '../../shared';
 import { By } from '@angular/platform-browser';
+import { CollapseWellComponent } from 'src/app/common';
+import { UpvoteComponent } from '../upvote/upvote.component';
+
 
 describe('SessionListComponent', () => {
   let mockAuthService,
@@ -21,11 +24,17 @@ describe('SessionListComponent', () => {
     };
     mockVoterService = { userHasVoted: () => true };
     TestBed.configureTestingModule({
-      declarations: [SessionsListComponent, DurationPipe],
+      declarations: [
+        SessionsListComponent,
+        DurationPipe,
+        /* CollapseWellComponent,
+        UpvoteComponent, */
+      ],
       providers: [
         { provide: AuthService, useValue: mockAuthService },
         { provide: VoterService, useValue: mockVoterService },
       ],
+      schemas:[NO_ERRORS_SCHEMA]
     });
     fixture = TestBed.createComponent(SessionsListComponent);
     component = fixture.componentInstance;
@@ -52,10 +61,12 @@ describe('SessionListComponent', () => {
 
       fixture.detectChanges();
 
-      expect(element.querySelector('[well-title]').textContent).toContain(
+      /* expect(element.querySelector('[well-title]').textContent).toContain(
         'Session 1'
-      );
-      expect(debugEl.query(By.css('[well-title]')).nativeElement.textContent).toContain('Session 1');
+      ); */
+      expect(
+        debugEl.query(By.css('[well-title]')).nativeElement.textContent
+      ).toContain('Session 1');
     });
   });
 });
